@@ -1,39 +1,45 @@
 using UnityEngine;
 using Cinemachine;
 
-[System.Serializable]
-public class CameraTriggerElement
-{
-    public CinemachineVirtualCamera camera;
-    public Collider col;
-}
-
 public class CameraManager : MonoBehaviour
 {
-    public CameraTriggerElement[] cameras;
+    public CinemachineVirtualCamera[] cameras;
+
+    public CinemachineVirtualCamera cameraSatu;
+    public CinemachineVirtualCamera cameraDua;
+
     public CinemachineVirtualCamera startCamera;
-    private CinemachineVirtualCamera _currentCam;
+    private CinemachineVirtualCamera currentCam;
 
     private void Start()
     {
-        _currentCam = startCamera;
-        if (_currentCam != null)
+        currentCam = startCamera;
+
+        for (int i = 0; i < cameras.Length; i++)
         {
-            _currentCam.Priority = 20;
+            if (cameras[i] == currentCam)
+            {
+                cameras[i].Priority = 20;
+            }
+            else
+            {
+                cameras[i].Priority = 10;
+            }
+                    
         }
     }
-
     public void SwitchCamera(CinemachineVirtualCamera newCam)
     {
-        if (_currentCam != null)
-        {
-            _currentCam.Priority = 10;
-        }
+        currentCam = newCam;
 
-        _currentCam = newCam;
-        if (_currentCam != null)
+        currentCam.Priority = 20;
+
+        for (int i = 0; i < cameras.Length; i++)
         {
-            _currentCam.Priority = 20;
+            if (cameras[i] != currentCam)
+            {
+                cameras[i].Priority = 10;
+            }
         }
     }
 }
