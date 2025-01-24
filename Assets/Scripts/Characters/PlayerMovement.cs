@@ -6,8 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("camera Manager")]
-    public CameraManager cameraManager;
 
     public CharacterController controller;
     public float speed = 5f;
@@ -31,15 +29,6 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            cameraManager.SwitchCamera(cameraManager.cameraSatu);
-        }
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            cameraManager.SwitchCamera(cameraManager.cameraDua);
-        }
 
         if (direction.magnitude >= 0.1f)
         {

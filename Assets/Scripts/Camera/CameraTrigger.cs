@@ -1,10 +1,9 @@
 using UnityEngine;
-using Cinemachine;
 
 public class CameraTrigger : MonoBehaviour
 {
-    public CinemachineVirtualCamera targetCamera; 
-    private CameraManager cameraManager; 
+    public int cameraIndex; // Indeks kamera yang akan diaktifkan
+    private CameraManager cameraManager;
 
     private void Start()
     {
@@ -15,10 +14,8 @@ public class CameraTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (cameraManager != null && targetCamera != null)
-            {
-                cameraManager.SwitchCamera(targetCamera);
-            }
+            Debug.Log($"Player masuk ke trigger dengan kamera indeks {cameraIndex}");
+            cameraManager.SwitchCamera(cameraIndex);
         }
     }
 }
